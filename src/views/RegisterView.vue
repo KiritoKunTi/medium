@@ -4,30 +4,51 @@
       <p class="title">Sign up</p>
       <p class="link pointer" @click="this.$router.push({ name: 'login' })">Have an account?</p>
       <!-- VALIDATION ERRORS -->
-      <form class="register-form" @submit.prevent="register()">
-        <input class="register-input form-control" type="text" placeholder="Username" v-model="user.username">
-        <input class="register-input form-control" type="email" placeholder="email" v-model="user.email">
-        <input class="register-input form-control" type="password" placeholder="password" v-model="user.password">
-        <button class="register-btn form-control">Sign up</button>
+      <validation-errors v-if="validationErrors" :validation-errors="validationErrors" />
+      <form class="register-form" @submit.prevent="onSubmit()">
+        <input class="register-input form-control" type="text" placeholder="Username" v-model="username">
+        <input class="register-input form-control" type="email" placeholder="email" v-model="email">
+        <input class="register-input form-control" type="password" placeholder="password" v-model="password">
+        <button class="register-btn form-control" :disabled="isSubmitting">Sign up</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import ValidationErrors from '@/components/ValidationErrors.vue';
+
 export default {
   data() {
     return {
-      user: {
-        username: "",
-        email: "",
-        password: "",
-      }
+      username: "",
+      email: "",
+      password: "",
+    }
+  },
+  components: {
+    ValidationErrors,
+  },
+  computed: {
+    isSubmitting() {
+      return this.$store.state.auth.isSubmitting;
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors;
     }
   },
   methods: {
-    register() {
-      console.log('register');
+    onSubmit() {
+      console.log('start register');
+      // this.$store.commit('registerStart');
+      this.$store.dispatch('register', {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      }).then(user => {
+        console.log('user succesfully registered', user);
+        this.$router.push({ name: 'home' })
+      });
     }
   }
 }
@@ -106,6 +127,15 @@ $secondary-color: #ccc;
         background-color: #5cb85c;
         color: white;
         width: fit-content;
+
+        &:disabled {
+          pointer-events: none;
+          cursor: not-allowed;
+          opacity: 0.65;
+          filter: alpha(opacity=65);
+          -webkit-box-shadow: none;
+          box-shadow: none;
+        }
 
         &:hover,
         &:focus {
