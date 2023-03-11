@@ -17,6 +17,8 @@
 
 <script>
 import ValidationErrors from '@/components/ValidationErrors.vue';
+import { actionTypes } from '@/store/modules/auth';
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -30,23 +32,18 @@ export default {
     ValidationErrors,
   },
   computed: {
-    isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
-    },
-    validationErrors() {
-      return this.$store.state.auth.validationErrors;
-    }
+    ...mapState({
+      isSubmitting: state => state.auth.isSubmitting,
+      validationErrors: state => state.auth.validationErrors,
+    })
   },
   methods: {
     onSubmit() {
-      console.log('start register');
-      // this.$store.commit('registerStart');
-      this.$store.dispatch('register', {
+      this.$store.dispatch(actionTypes.register, {
         email: this.email,
         username: this.username,
         password: this.password,
-      }).then(user => {
-        console.log('user succesfully registered', user);
+      }).then(() => {
         this.$router.push({ name: 'home' })
       });
     }

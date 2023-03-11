@@ -6,9 +6,9 @@ export default createStore({
   },
   getters: {
   },
-  mutations: {
+  mutations: { // sync
   },
-  actions: {
+  actions: {  // async
   },
   modules: {
     auth,
