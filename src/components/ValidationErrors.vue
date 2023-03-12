@@ -34,7 +34,6 @@ export default {
   li {
     color: #B85C5C;
     margin-left: 16px;
-
     font-weight: bold;
   }
 }
