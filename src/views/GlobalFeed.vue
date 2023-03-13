@@ -1,12 +1,14 @@
 <template>
-  <div class="feed-wrap container">
+  <div class="home-page">
     BANNER
-    <div class="row">
-      <div class="feed-col">
-        <feed-view :apiURL="apiURL" />
-      </div>
-      <div class="tag-col">
-        POPULAR TAGS
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+          <feed-view :apiURL="apiURL" />
+        </div>
+        <div class="col-md-3">
+          POPULAR TAGS
+        </div>
       </div>
     </div>
   </div>
@@ -26,21 +28,3 @@ export default {
   },
 }
 </script>
-
-<style lang='scss' scoped>
-.feed-wrap {
-  .row {
-    display: grid;
-    grid-template-columns: auto 250px;
-
-    .feed-col {
-      border: 1px solid black;
-    }
-
-    .tag-col {
-      border: 1px solid black;
-
-    }
-  }
-}
-</style>

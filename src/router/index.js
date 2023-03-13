@@ -3,11 +3,6 @@ import GlobalFeed from '@/views/GlobalFeed'
 
 const routes = [
   {
-    path: '/',
-    name: 'globalFeed',
-    component: GlobalFeed
-  },
-  {
     path: '/register',
     name: 'register',
     component: () => import('@/views/RegisterView.vue')
@@ -16,7 +11,47 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/LoginView.vue')
-  }
+  },
+  {
+    path: '/',
+    name: 'globalFeed',
+    component: GlobalFeed
+  },
+  {
+    path: '/feed',
+    name: 'yourFeed',
+    component: GlobalFeed
+  },
+  {
+    path: '/tags/:slug',
+    name: 'tag',
+    component: GlobalFeed
+  },
+  {
+    path: '/articles/new',
+    name: 'createArticle',
+    component: GlobalFeed
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: GlobalFeed
+  },
+  {
+    path: '/profiles/:slug',
+    name: 'userProfile',
+    component: GlobalFeed
+  },
+  {
+    path: '/profiles/:slug/favorites',
+    name: 'userProfileFavorites',
+    component: GlobalFeed
+  },
+  {
+    path: '/articles/:slug',
+    name: 'article',
+    component: GlobalFeed
+  },
 ]
 
 const router = createRouter({

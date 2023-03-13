@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoading">isLoading...</div>
   <div v-if="error">Something went wrong</div>
-  <!-- <div v-if="feed">
+  <div v-if="feed">
     <div class="article-preview" v-for="(article, index) in feed.articles" :key="index">
       <div class="article-meta">
         <router-link :to="{ name: 'userProfile', params: { slug: article.author.username } }">
@@ -11,15 +11,29 @@
           <router-link :to="{ name: 'userProfile', params: { slug: article.author.username } }">
             {{ article.author.username }}
           </router-link>
+          <span class="date">{{ article.createdAt }}</span>
         </div>
+        <div class="pull-xs-right">
+          ADD TO FAVORITE
+        </div>
+        <router-link :to="{ name: 'article', params: { slug: article.slug } }" class="preview-link">
+          <h1>{{ article.title }}</h1>
+          <p>{{ article.description }}</p>
+          <span>READ MORE...</span>
+          TAG LIST
+        </router-link>
       </div>
     </div>
-  </div> -->
+    <pagination-view :total="feed.articlesCount" :limit="limit" :current-page="currentPage" :url="baseURL" />
+  </div>
 </template>
 
 <script>
 import { actionTypes } from '@/store/modules/feed';
 import { mapState } from 'vuex';
+import PaginationView from '@/components/PaginationView.vue'
+import { limit } from '@/helpers/vars'
+import queryString from 'query-string'
 
 export default {
   props: {
@@ -28,15 +42,49 @@ export default {
       required: true,
     }
   },
+  components: {
+    PaginationView,
+  },
+  data() {
+    return {
+      limit,
+    }
+  },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
       feed: state => state.feed.data,
       error: state => state.feed.error,
-    })
+    }),
+    currentPage() {
+      return Number(this.$route.query.page || '1')
+    },
+    baseURL() {
+      return this.$route.path;
+    },
+    offset() {
+      return this.currentPage * limit - limit;
+    }
+  },
+  watch: {
+    currentPage() {
+      this.fetchFeed();
+    }
   },
   mounted() {
-    this.$store.dispatch(actionTypes.getFeed, { apiURL: this.apiURL })
+    this.fetchFeed();
+  },
+  methods: {
+    fetchFeed() {
+      const parsedUrl = queryString.parseUrl(this.apiURL)
+      const stringifiedParams = queryString.stringify({
+        limit,
+        offset: this.offset,
+        ...parsedUrl.query,
+      })
+      const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
+      this.$store.dispatch(actionTypes.getFeed, { apiURL: apiUrlWithParams })
+    }
   }
 }
 </script>
