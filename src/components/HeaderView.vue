@@ -1,8 +1,8 @@
 <template>
   <div class="header container">
-    <p class="header-logo logo pointer" @click="this.$router.push({ name: 'home' })">medium</p>
+    <p class="header-logo logo pointer" @click="this.$router.push({ name: 'globalFeed' })">medium</p>
     <div class="switch">
-      <p class="home-item pointer mr-13" @click="this.$router.push({ name: 'home' })">Home</p>
+      <p class="home-item pointer mr-13" @click="this.$router.push({ name: 'globalFeed' })">Home</p>
       <template v-if="isLoggedIn">
         <div class="menu logged">
           <p class="menu-item pointer" @click="this.$router.push({ name: 'createArticle' })">
