@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isLoading">...Loading</div>
-  <div v-if="error">Somethings went wrong</div>
+  <fragment-loading v-if="isLoading" />
+  <fragment-error v-if="error" />
   <div class="sidebar" v-if="popularTags">
     <p>Popular tags</p>
     <div class="tag-list">
@@ -15,13 +15,13 @@
 <script>
 import { actionTypes } from '@/store/modules/popularTags';
 import { mapState } from 'vuex';
+import FragmentError from '@/components/FragmentError.vue';
+import FragmentLoading from '@/components/FragmentLoading.vue';
 
 export default {
-  props: {
-    apiURL: {
-      type: String,
-      required: true
-    }
+  components: {
+    FragmentError,
+    FragmentLoading,
   },
   mounted() {
     this.$store.dispatch(actionTypes.getPopularTags);

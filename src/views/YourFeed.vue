@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      apiURL: '/articles',
+      apiURL: '/articles/feed',
     }
   },
 }

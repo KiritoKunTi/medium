@@ -25,10 +25,11 @@ export default {
     PopularTags,
     BannerView,
   },
-  data() {
-    return {
-      apiURL: '/articles',
+  computed: {
+    apiURL() {
+      const tagName = this.$route.params.slug;
+      return `/articles?tag=${tagName}`;
     }
-  },
+  }
 }
 </script>

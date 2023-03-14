@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isLoading">isLoading...</div>
-  <div v-if="error">Something went wrong</div>
+  <fragment-loading v-if="isLoading" />
+  <fragment-error v-if="error" />
   <div v-if="feed">
     <div class="article-preview" v-for="(article, index) in feed.articles" :key="index">
       <div class="article-meta">
@@ -34,6 +34,8 @@ import { mapState } from 'vuex';
 import PaginationView from '@/components/PaginationView.vue'
 import { limit } from '@/helpers/vars'
 import queryString from 'query-string'
+import FragmentLoading from '@/components/FragmentLoading.vue';
+import FragmentError from '@/components/FragmentError.vue';
 
 export default {
   props: {
@@ -44,6 +46,8 @@ export default {
   },
   components: {
     PaginationView,
+    FragmentError,
+    FragmentLoading
   },
   data() {
     return {
@@ -88,5 +92,3 @@ export default {
   }
 }
 </script>
-
-<style lang='scss' scoped></style>
