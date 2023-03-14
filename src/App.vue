@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import HeaderView from '@/components/HeaderView.vue'
+import HeaderView from '@/components/TheHeader.vue'
 import { actionTypes } from '@/store/modules/auth';
 
 export default {

@@ -1,13 +1,13 @@
 <template>
   <div class="home-page">
-    BANNER
+    <banner-view />
     <div class="container page">
       <div class="row">
         <div class="col-md-9">
           <feed-view :apiURL="apiURL" />
         </div>
         <div class="col-md-3">
-          POPULAR TAGS
+          <popular-tags :apiURL="tagsURL" />
         </div>
       </div>
     </div>
@@ -16,14 +16,19 @@
 
 <script>
 import FeedView from '@/components/FeedView.vue'
+import PopularTags from '@/components/PopularTags.vue'
+import BannerView from '@/components/BannerView.vue'
 
 export default {
   components: {
     FeedView,
+    PopularTags,
+    BannerView,
   },
   data() {
     return {
       apiURL: '/articles',
+      tagsURL: '/tags'
     }
   },
 }
