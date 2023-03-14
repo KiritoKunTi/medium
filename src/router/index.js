@@ -50,6 +50,11 @@ const routes = [
   {
     path: '/articles/:slug',
     name: 'article',
+    component: () => import('@/views/ArticleView.vue')
+  },
+  {
+    path: '/articles/:slug/edit',
+    name: 'editArticle',
     component: GlobalFeed
   },
 ]

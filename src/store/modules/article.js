@@ -1,4 +1,4 @@
-import articleApi from '@/api/feed'
+import articleApi from '@/api/article'
 
 const state = {
   data: null,
@@ -33,8 +33,8 @@ const mutations = {
 const actions = {
   [actionTypes.getArticle](context, {slug}) {
     return new Promise(resolve => {
-      context.commit(mutationTypes.getArticleStart)
-       articleApi
+      context.commit(mutationTypes.getArticleStart);
+      articleApi
         .getArticle(slug)
         .then(article => {
           context.commit(mutationTypes.getArticleSuccess, article)
