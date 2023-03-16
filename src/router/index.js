@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: GlobalFeed
+    component: () => import('@/views/EditArticle.vue')
   },
 ]
 
