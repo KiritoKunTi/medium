@@ -35,7 +35,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          TAGLIST
+          <article-tags :tag-list="article.tagList" />
         </div>
       </div>
     </div>
@@ -45,6 +45,7 @@
 <script>
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FragmentError from '@/components/FragmentLoading.vue';
+import ArticleTags from '@/components/ArticleTags.vue';
 import { actionTypes as articleActionTypes } from '@/store/modules/article';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth'
 import { mapGetters, mapState } from 'vuex';
@@ -67,11 +68,12 @@ export default {
         return false;
       }
       return this.currentUser.username === this.article.author.username;
-    }
+    },
   },
   components: {
     FragmentLoading,
     FragmentError,
+    ArticleTags,
   },
   methods: {
     deleteArticle() {

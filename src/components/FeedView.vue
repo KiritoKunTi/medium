@@ -20,7 +20,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>READ MORE...</span>
-          TAG LIST
+          <article-tags :tag-list="article.tagList" />
         </router-link>
       </div>
     </div>
@@ -36,6 +36,7 @@ import { limit } from '@/helpers/vars'
 import queryString from 'query-string'
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FragmentError from '@/components/FragmentError.vue';
+import ArticleTags from './ArticleTags.vue';
 
 export default {
   props: {
@@ -47,7 +48,8 @@ export default {
   components: {
     PaginationView,
     FragmentError,
-    FragmentLoading
+    FragmentLoading,
+    ArticleTags,
   },
   data() {
     return {
