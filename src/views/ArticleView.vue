@@ -19,7 +19,7 @@
               <i class="ion-edit" />
               Edit Article
             </router-link>
-            <button class="btn btn-outline-danger btn-sm">
+            <button class="btn btn-outline-danger btn-sm" @click="deleteArticle()">
               <i class="ion-trash-a" />
               Delete Article
             </button>
@@ -72,6 +72,14 @@ export default {
   components: {
     FragmentLoading,
     FragmentError,
+  },
+  methods: {
+    deleteArticle() {
+      this.$store.dispatch(articleActionTypes.deleteArticle, { slug: this.$route.params.slug })
+        .then(() => {
+          this.$router.push({ name: 'globalFeed' })
+        })
+    }
   }
 }
 </script>
