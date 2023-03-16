@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
           <validation-errors v-if="errors" :validation-errors="errors" />
-          <form @submit.prevent="onSubmit()">
+          <form @submit.prevent="onSubmit">
             <fieldset>
               <fieldset class="form-group">
                 <input class="form-control form-control-lg" type="text" placeholder="Article Title" v-model="title">
@@ -38,7 +38,7 @@ import ValidationErrors from './ValidationErrors.vue'
 
 export default {
   props: {
-    initialValue: {
+    initialValues: {
       type: Object,
       required: true,
     },
@@ -68,7 +68,7 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: []
+        tagList: this.tagList.split(' ')
       }
       this.$emit('articleSubmit', form)
     }
