@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: GlobalFeed
+    component: () => import('@/views/CreateArticle.vue')
   },
   {
     path: '/settings',
