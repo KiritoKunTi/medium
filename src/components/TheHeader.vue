@@ -18,6 +18,9 @@
             <img :src="currentUser.image" alt="profile" class="profile-img">
             <span>{{ currentUser.username }}</span>
           </p>
+          <button class="btn btn-outline-danger" @click="logout">
+            Log Out
+          </button>
         </div>
       </template>
       <template v-if="isAnonymous">
@@ -32,7 +35,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { getterTypes } from '@/store/modules/auth'
+import { actionTypes, getterTypes } from '@/store/modules/auth'
 
 export default {
   computed: {
@@ -41,6 +44,13 @@ export default {
       isLoggedIn: getterTypes.isLoggedIn,
       isAnonymous: getterTypes.isAnonymous,
     })
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch(actionTypes.logout).then(() => {
+        this.$router.push({ name: 'globalFeed' })
+      })
+    }
   }
 }
 </script>
