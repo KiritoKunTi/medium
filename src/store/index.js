@@ -3,8 +3,9 @@ import auth from '@/store/modules/auth.js'
 import feed from '@/store/modules/feed'
 import popularTags from '@/store/modules/popularTags'
 import article from '@/store/modules/article'
-import createArticle from './modules/createArticle'
-import editArticle from './modules/editArticle'
+import createArticle from '@/store/modules/createArticle'
+import editArticle from '@/store/modules/editArticle'
+import settings from '@/store/modules/settings'
 
 export default createStore({
   state: {
@@ -22,5 +23,6 @@ export default createStore({
     article,
     createArticle,
     editArticle,
+    settings,
   }
 })
