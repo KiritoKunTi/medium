@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/settings',
     name: 'settings',
-    component: GlobalFeed
+    component: () => import('@/views/SettingsView.vue')
   },
   {
     path: '/profiles/:slug',
