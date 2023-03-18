@@ -14,7 +14,8 @@
           <span class="date">{{ article.createdAt }}</span>
         </div>
         <div class="pull-xs-right">
-          ADD TO FAVORITE
+          <add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug"
+            :favorites-count="article.favoritesCount" />
         </div>
         <router-link :to="{ name: 'article', params: { slug: article.slug } }" class="preview-link">
           <h1>{{ article.title }}</h1>
@@ -36,7 +37,8 @@ import { limit } from '@/helpers/vars'
 import queryString from 'query-string'
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FragmentError from '@/components/FragmentError.vue';
-import ArticleTags from './ArticleTags.vue';
+import ArticleTags from '@/components/ArticleTags.vue';
+import AddToFavorites from '@/components/AddToFavorites.vue'
 
 export default {
   props: {
@@ -50,6 +52,7 @@ export default {
     FragmentError,
     FragmentLoading,
     ArticleTags,
+    AddToFavorites,
   },
   data() {
     return {
