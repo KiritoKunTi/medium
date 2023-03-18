@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import auth from '@/store/modules/auth.js'
 import feed from '@/store/modules/feed'
 import popularTags from '@/store/modules/popularTags'
@@ -6,15 +6,16 @@ import article from '@/store/modules/article'
 import createArticle from '@/store/modules/createArticle'
 import editArticle from '@/store/modules/editArticle'
 import settings from '@/store/modules/settings'
+import addToFavorites from '@/store/modules/addToFavorites'
 
 export default createStore({
-  state: {
+  state: {},
+  getters: {},
+  mutations: {
+    // sync
   },
-  getters: {
-  },
-  mutations: { // sync
-  },
-  actions: {  // async
+  actions: {
+    // async
   },
   modules: {
     auth,
@@ -24,5 +25,6 @@ export default createStore({
     createArticle,
     editArticle,
     settings,
-  }
+    addToFavorites,
+  },
 })
