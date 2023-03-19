@@ -1,67 +1,67 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import GlobalFeed from '@/views/GlobalFeed'
 
 const routes = [
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/views/RegisterView.vue')
+    component: () => import('@/views/RegisterView.vue'),
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/LoginView.vue')
+    component: () => import('@/views/LoginView.vue'),
   },
   {
     path: '/',
     name: 'globalFeed',
-    component: GlobalFeed
+    component: GlobalFeed,
   },
   {
     path: '/feed',
     name: 'yourFeed',
-    component: () => import('@/views/YourFeed.vue')
+    component: () => import('@/views/YourFeed.vue'),
   },
   {
     path: '/tags/:slug',
     name: 'tag',
-    component: () => import('@/views/TagFeed.vue')
+    component: () => import('@/views/TagFeed.vue'),
   },
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: () => import('@/views/CreateArticle.vue')
+    component: () => import('@/views/CreateArticle.vue'),
   },
   {
     path: '/settings',
     name: 'settings',
-    component: () => import('@/views/SettingsView.vue')
+    component: () => import('@/views/SettingsView.vue'),
   },
   {
     path: '/profiles/:slug',
     name: 'userProfile',
-    component: GlobalFeed
+    component: () => import('@/views/UserProfile.vue'),
   },
   {
     path: '/profiles/:slug/favorites',
     name: 'userProfileFavorites',
-    component: GlobalFeed
+    component: () => import('@/views/UserProfile.vue'),
   },
   {
     path: '/articles/:slug',
     name: 'article',
-    component: () => import('@/views/ArticleView.vue')
+    component: () => import('@/views/ArticleView.vue'),
   },
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: () => import('@/views/EditArticle.vue')
+    component: () => import('@/views/EditArticle.vue'),
   },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router
