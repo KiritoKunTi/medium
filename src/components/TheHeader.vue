@@ -1,36 +1,53 @@
 <template>
-  <div class="header container">
-    <p class="header-logo logo pointer" @click="this.$router.push({ name: 'globalFeed' })">medium</p>
-    <div class="switch">
-      <p class="home-item pointer mr-13" @click="this.$router.push({ name: 'globalFeed' })">Home</p>
-      <template v-if="isLoggedIn">
-        <div class="menu logged">
-          <p class="menu-item pointer" @click="this.$router.push({ name: 'createArticle' })">
-            <img src="@/assets/images/edit-svgrepo-com.svg" alt="img" class="item-img">
-            <span>New article</span>
-          </p>
-          <p class="menu-item pointer" @click="this.$router.push({ name: 'settings' })">
-            <img src="@/assets/images/settings-svgrepo-com.svg" alt="img" class="item-img">
-            <span>Settings</span>
-          </p>
-          <p class="menu-item pointer"
-            @click="this.$router.push({ name: 'userProfile', params: { slug: currentUser.username } })">
-            <img :src="currentUser.image" alt="profile" class="profile-img">
-            <span>{{ currentUser.username }}</span>
-          </p>
-          <button class="btn btn-outline-danger" @click="logout">
-            Log Out
-          </button>
-        </div>
-      </template>
-      <template v-if="isAnonymous">
-        <div class="menu not-logged">
-          <p class="menu-item pointer" active-class="active" @click="this.$router.push({ name: 'login' })">Sign in</p>
-          <p class="menu-item pointer" active-class="active" @click="this.$router.push({ name: 'register' })">Sign up</p>
-        </div>
-      </template>
+  <nav class="navbar navbar-light">
+    <div class="container">
+      <router-link :to="{ name: 'globalFeed' }" class="navbar-brand">
+        medium
+      </router-link>
+      <ul class="nav navbar-nav pull-xs-right">
+        <li class="nav-item">
+          <router-link :to="{ name: 'globalFeed' }" class="nav-link">
+            Home
+          </router-link>
+        </li>
+        <template v-if="isLoggedIn">
+          <li class="nav-item">
+            <router-link :to="{ name: 'createArticle' }" class="nav-link">
+              <i class="ion-compose" /> &nbsp; New Article
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'settings' }" class="nav-link">
+              <i class="ion-gear-a" /> &nbsp; Settings
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'userProfile', params: { slug: currentUser.username } }" class="nav-link">
+              <img class="user-pic" :src="currentUser.image" alt="profilePicture">
+              &nbsp; {{ currentUser.username }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-danger" @click="logout">
+              Log Out
+            </button>
+          </li>
+        </template>
+        <template v-if="isAnonymous">
+          <li class="nav-item">
+            <router-link :to="{ name: 'login' }" class="nav-link">
+              Sign In
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'register', params: { slug: currentUser.username } }" class="nav-link">
+              Sign Up
+            </router-link>
+          </li>
+        </template>
+      </ul>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -54,64 +71,3 @@ export default {
   }
 }
 </script>
-
-<style lang='scss' scoped>
-.active {
-  color: #373a3c;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 15px;
-
-  .logo {}
-
-  .switch {
-    display: flex;
-    align-items: center;
-
-    .home-item {
-      color: rgba(0, 0, 0, .3);
-
-      &:hover {
-        color: rgba(0, 0, 0, .8);
-      }
-    }
-
-    .logged {}
-
-    .not-logged {}
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      .menu-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        color: rgba(0, 0, 0, .3);
-
-        &:hover {
-          color: rgba(0, 0, 0, .8);
-        }
-
-        .item-img {
-          width: 16px;
-          height: 18px;
-          color: rgba(0, 0, 0, .3);
-        }
-
-        .profile-img {
-          width: 30px;
-          height: 30px;
-          border-radius: 100%;
-        }
-      }
-    }
-  }
-}
-</style>  
