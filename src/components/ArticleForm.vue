@@ -68,10 +68,13 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.tagList.split(' ')
+        tagList: this.clearList(this.tagList.split(' '))
       }
       this.$emit('articleSubmit', form)
+    },
+    clearList(array) {
+      return array.filter(item => item.length > 0)
     }
-  }
+  },
 }
 </script>
