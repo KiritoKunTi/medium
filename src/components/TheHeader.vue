@@ -40,7 +40,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'register', params: { slug: currentUser.username } }" class="nav-link">
+            <router-link :to="{ name: 'register' }" class="nav-link">
               Sign Up
             </router-link>
           </li>
@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     logout() {
+      console.log('logout');
       this.$store.dispatch(actionTypes.logout).then(() => {
         this.$router.push({ name: 'globalFeed' })
       })
