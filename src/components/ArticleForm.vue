@@ -35,6 +35,7 @@
 
 <script>
 import ValidationErrors from './ValidationErrors.vue'
+import { clearList } from '@/helpers/utils'
 
 export default {
   props: {
@@ -68,13 +69,10 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.clearList(this.tagList.split(' '))
+        tagList: clearList(this.tagList.split(' '))
       }
       this.$emit('articleSubmit', form)
     },
-    clearList(array) {
-      return array.filter(item => item.length > 0)
-    }
   },
 }
 </script>
