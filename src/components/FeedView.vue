@@ -11,7 +11,7 @@
           <router-link :to="{ name: 'userProfile', params: { slug: article.author.username } }">
             {{ article.author.username }}
           </router-link>
-          <span class="date">{{ article.createdAt }}</span>
+          <span class="date">{{ $filters.dateToString(article.createdAt) }}</span>
         </div>
         <div class="pull-xs-right">
           <add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug"
