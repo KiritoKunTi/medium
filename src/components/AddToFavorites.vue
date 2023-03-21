@@ -1,8 +1,12 @@
 <template>
   <button @click="handleLike()"
     :class="{ 'btn': true, 'btn-sm': true, 'btn-primary': isFavoritedOptimistic, 'btn-outline-primary': !isFavoritedOptimistic }">
-    <i class="ion-heart" />
-    <span>&nbsp; {{ favoritesCountOptimistic }}</span>
+    <i class="ion-heart" /> &nbsp;
+    <span v-if="withText">
+      <span v-if="isFavoritedOptimistic">Unfavorite Article</span>
+      <span v-else>Favorite Article</span>
+    </span>
+    <span> &nbsp; {{ favoritesCountOptimistic }}</span>
   </button>
 </template>
 
@@ -22,6 +26,11 @@ export default {
     articleSlug: {
       type: String,
       required: true,
+    },
+    withText: {
+      type: Boolean,
+      required: false,
+      default: false,
     }
   },
   data() {
