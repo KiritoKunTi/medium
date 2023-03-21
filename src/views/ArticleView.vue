@@ -24,6 +24,11 @@
               Delete Article
             </button>
           </span>
+          <span v-if="!isAuthor">
+            <follow-user :author="article.author" />
+            <add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug"
+              :favorites-count="article.favoritesCount" :with-text="true" />
+          </span>
         </div>
       </div>
     </div>
@@ -46,6 +51,8 @@
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FragmentError from '@/components/FragmentLoading.vue';
 import ArticleTags from '@/components/ArticleTags.vue';
+import AddToFavorites from '@/components/AddToFavorites.vue';
+import FollowUser from '@/components/FollowUser.vue';
 import { actionTypes as articleActionTypes } from '@/store/modules/article';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth'
 import { mapGetters, mapState } from 'vuex';
@@ -74,6 +81,8 @@ export default {
     FragmentLoading,
     FragmentError,
     ArticleTags,
+    AddToFavorites,
+    FollowUser,
   },
   methods: {
     deleteArticle() {

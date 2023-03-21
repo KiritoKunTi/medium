@@ -10,7 +10,7 @@
             <h4>{{ profile.username }}</h4>
             <p>{{ profile.bio }}</p>
             <div>
-              FOLLOW BUTTON
+              <follow-user :author="profile" />
               <router-link v-if="isCurrentUser" class="btn btn-sm btn-outline-secondary action-btn"
                 :to="{ name: 'settings' }">
                 Edit Profile Settings
@@ -51,6 +51,7 @@
 import FragmentError from '@/components/FragmentError.vue';
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FeedView from '@/components/FeedView.vue';
+import FollowUser from '@/components/FollowUser.vue';
 import { mapState, mapGetters } from 'vuex';
 import { actionTypes as userProfileActionTypes } from '@/store/modules/userProfile';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth';
@@ -97,6 +98,6 @@ export default {
       this.$store.dispatch(userProfileActionTypes.getUserProfile, { slug: this.userProfileSlug });
     }
   },
-  components: { FragmentLoading, FragmentError, FeedView }
+  components: { FragmentLoading, FragmentError, FeedView, FollowUser }
 }
 </script>
