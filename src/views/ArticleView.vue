@@ -3,33 +3,7 @@
     <div class="banner">
       <div class="container" v-if="article">
         <h1>{{ article.title }}</h1>
-        <div class="article-meta">
-          <router-link :to="{ name: 'userProfile', params: { slug: article.author.username } }">
-            <img :src="article.author.image" alt="auhtor">
-          </router-link>
-          <div class="info">
-            <router-link :to="{ name: 'userProfile', params: { slug: article.author.username } }">
-              {{ article.author.username }}
-            </router-link>
-            <span class="date">{{ article.createdAt }}</span>
-          </div>
-          <span v-if="isAuthor">
-            <router-link class="btn btn-outline-secondary btn-sm"
-              :to="{ name: 'editArticle', params: { slug: article.slug } }">
-              <i class="ion-edit" />
-              Edit Article
-            </router-link>
-            <button class="btn btn-outline-danger btn-sm" @click="deleteArticle()">
-              <i class="ion-trash-a" />
-              Delete Article
-            </button>
-          </span>
-          <span v-if="!isAuthor">
-            <follow-user :author="article.author" />
-            <add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug"
-              :favorites-count="article.favoritesCount" :with-text="true" />
-          </span>
-        </div>
+        <article-actions :article="article" :is-author="isAuthor" />
       </div>
     </div>
     <div class="container page">
@@ -43,6 +17,10 @@
           <article-tags :tag-list="article.tagList" />
         </div>
       </div>
+      <hr>
+      <div class="article-actions">
+        <article-actions :article="article" :is-author="isAuthor" v-if="article" />
+      </div>
     </div>
   </div>
 </template>
@@ -51,8 +29,7 @@
 import FragmentLoading from '@/components/FragmentLoading.vue';
 import FragmentError from '@/components/FragmentLoading.vue';
 import ArticleTags from '@/components/ArticleTags.vue';
-import AddToFavorites from '@/components/AddToFavorites.vue';
-import FollowUser from '@/components/FollowUser.vue';
+import ArticleActions from '@/components/ArticleActions.vue';
 import { actionTypes as articleActionTypes } from '@/store/modules/article';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth'
 import { mapGetters, mapState } from 'vuex';
@@ -81,16 +58,8 @@ export default {
     FragmentLoading,
     FragmentError,
     ArticleTags,
-    AddToFavorites,
-    FollowUser,
+    ArticleActions,
   },
-  methods: {
-    deleteArticle() {
-      this.$store.dispatch(articleActionTypes.deleteArticle, { slug: this.$route.params.slug })
-        .then(() => {
-          this.$router.push({ name: 'globalFeed' })
-        })
-    }
-  }
+  methods: {}
 }
 </script>
