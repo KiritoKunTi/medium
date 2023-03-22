@@ -10,7 +10,7 @@
             <h4>{{ profile.username }}</h4>
             <p>{{ profile.bio }}</p>
             <div>
-              <follow-user :author="profile" />
+              <follow-user :author="profile" v-if="!isCurrentUser" />
               <router-link v-if="isCurrentUser" class="btn btn-sm btn-outline-secondary action-btn"
                 :to="{ name: 'settings' }">
                 Edit Profile Settings
