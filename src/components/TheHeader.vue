@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log('logout');
       this.$store.dispatch(actionTypes.logout).then(() => {
         this.$router.push({ name: 'globalFeed' })
       })

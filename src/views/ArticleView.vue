@@ -18,14 +18,13 @@
         </div>
       </div>
       <hr>
-      <div class="article-actions">
-        <article-actions :article="article" :is-author="isAuthor" v-if="article" />
+      <div class="article-actions" v-if="article">
+        <article-actions :article="article" :is-author="isAuthor"/>
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
           
           <div v-if="isLoggedIn">
-            {{ commentsError }}
             <form class="card comment-form" @submit.prevent="addComment()">
               <div class="card-block">
                 <textarea class="form-control" placeholder="Write a comment..." rows="3" v-model="commentBody" required></textarea>
@@ -47,7 +46,6 @@
             <router-link :to="{name: 'register'}">sign up</router-link>
             to add comments on this article.
           </p>
-
         </div>
       </div>
     </div>

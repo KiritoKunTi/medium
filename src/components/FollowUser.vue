@@ -26,12 +26,21 @@ export default {
     author: {
       type: Object,
       required: true,
+    },
+    isAnonymous: {
+      type: Boolean,
+      required: false,
     }
   },
   methods: {
     handleFollow() {
-      this.$store.dispatch(actionTypes.followUser, { username: this.username, isFollowed: this.isFollowedOptimistic });
-      this.isFollowedOptimistic = !this.isFollowedOptimistic;
+      if(this.isAnonymous) {
+        this.$router.push({name: 'login'})
+      }
+      else {  
+        this.$store.dispatch(actionTypes.followUser, { username: this.username, isFollowed: this.isFollowedOptimistic });
+        this.isFollowedOptimistic = !this.isFollowedOptimistic;
+      }
     }
   }
 }

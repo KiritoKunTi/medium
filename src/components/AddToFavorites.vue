@@ -31,6 +31,10 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    isAnonymous: {
+      type: Boolean, 
+      required: false,
     }
   },
   data() {
@@ -41,10 +45,15 @@ export default {
   },
   methods: {
     handleLike() {
-      this.$store.dispatch(actionTypes.addToFavorite, { slug: this.articleSlug, isFavorited: this.isFavoritedOptimistic });
-      if (this.isFavoritedOptimistic) this.favoritesCountOptimistic--;
-      else this.favoritesCountOptimistic++;
-      this.isFavoritedOptimistic = !this.isFavoritedOptimistic;
+      if(this.isAnonymous) {
+        this.$router.push({name: 'login'})
+      }
+      else {
+        this.$store.dispatch(actionTypes.addToFavorite, { slug: this.articleSlug, isFavorited: this.isFavoritedOptimistic });
+        if (this.isFavoritedOptimistic) this.favoritesCountOptimistic--;
+        else this.favoritesCountOptimistic++;
+        this.isFavoritedOptimistic = !this.isFavoritedOptimistic;
+      }
     }
   }
 }

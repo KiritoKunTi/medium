@@ -20,8 +20,8 @@
       </button>
     </span>
     <span v-if="!isAuthor">
-      <follow-user :author="article.author" /> &nbsp;
-      <add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug"
+      <follow-user :is-anonymous="isAnonymous" :author="article.author" /> &nbsp;
+      <add-to-favorites :is-anonymous="isAnonymous" :is-favorited="article.favorited" :article-slug="article.slug"
         :favorites-count="article.favoritesCount" :with-text="true" />
     </span>
   </div>
@@ -31,7 +31,8 @@
 import FollowUser from '@/components/FollowUser.vue'
 import AddToFavorites from '@/components/AddToFavorites.vue'
 import { actionTypes as articleActionTypes } from '@/store/modules/article';
-
+import { getterTypes } from '@/store/modules/auth';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -47,6 +48,11 @@ export default {
       type: Boolean,
       required: true,
     }
+  },
+  computed: {
+    ...mapGetters({
+      isAnonymous: getterTypes.isAnonymous
+    })
   },
   methods: {
     deleteArticle() {
