@@ -1,2 +1,2 @@
 # medium
-Deployed on medium[https://medium-bbfc7.web.app/#/]
+Deployed on [**medium**](https://medium-bbfc7.web.app/#/)
