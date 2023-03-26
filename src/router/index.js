@@ -1,4 +1,6 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
+import store from '@/store'
+import { getterTypes } from '@/store/modules/auth'
 import GlobalFeed from '@/views/GlobalFeed'
 
 const routes = [
@@ -62,6 +64,15 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const isAnonymous = store.getters[getterTypes.isAnonymous];
+  const needsToLogIn = ['createArticle', 'settings', 'editArticle']
+  if(isAnonymous && needsToLogIn.includes(to.name)) {
+    next({name: 'login'})
+  }
+  next()
 })
 
 export default router
