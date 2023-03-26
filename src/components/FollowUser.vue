@@ -29,7 +29,7 @@ export default {
     },
     isAnonymous: {
       type: Boolean,
-      required: false,
+      required: true,
     }
   },
   methods: {

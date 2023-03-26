@@ -10,7 +10,7 @@
             <h4>{{ profile.username }}</h4>
             <p>{{ profile.bio }}</p>
             <div>
-              <follow-user :author="profile" v-if="!isCurrentUser" />
+              <follow-user :author="profile" v-if="!isCurrentUser" :is-anonymous="isAnonymous"/>
               <router-link v-if="isCurrentUser" class="btn btn-sm btn-outline-secondary action-btn"
                 :to="{ name: 'settings' }">
                 Edit Profile Settings
@@ -64,7 +64,8 @@ export default {
       error: state => state.userProfile.error,
     }),
     ...mapGetters({
-      currentUser: authGetterTypes.currentUser
+      currentUser: authGetterTypes.currentUser,
+      isAnonymous: authGetterTypes.isAnonymous,
     }),
     isCurrentUser() {
       if (!this.currentUser || !this.profile) {
